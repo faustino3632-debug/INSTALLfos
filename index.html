@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Portal de Instalación FOS</title>
+ <style>
+ /* Estilos base y reset */
+ * {
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+ }
+ body {
+ font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+ background-color: #0f172a; /* Fondo oscuro moderno */
+ color: #f8fafc;
+ line-height: 1.6;
+ display: flex;
+ flex-direction: column;
+ min-height: 100vh;
+ }
+ 
+/* Encabezado */
+ header {
+ background-color: #1e293b;
+ padding: 20px 0;
+ text-align: center;
+ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+ border-bottom: 2px solid #38bdf8;
+ }
+ header h1 {
+ font-size: 2.5rem;
+ letter-spacing: 1px;
+ }
+ header span {
+ color: #38bdf8;
+ }
+
+ /* Contenedor principal */
+ .container {
+ flex: 1;
+ max-width: 1400px; /* Ampliado para acomodar 5 tarjetas mejor */
+ margin: 0 auto;
+ padding: 40px 20px;
+ text-align: center;
+ }
+ 
+.description {
+ font-size: 1.2rem;
+ color: #94a3b8;
+ margin-bottom: 50px;
+ max-width: 700px;
+ margin-left: auto;
+ margin-right: auto;
+ }
+
+ /* Grid de tarjetas */
+ .grid-container {
+ display: flex;
+ justify-content: center;
+ gap: 30px;
+ flex-wrap: wrap;
+ }
+
+ /* Tarjetas de instalación */
+ .card {
+ background-color: #1e293b;
+ border-radius: 16px;
+ padding: 40px 30px;
+ width: 100%;
+ max-width: 320px; 
+ box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+ transition: transform 0.3s ease, box-shadow 0.3s ease;
+ position: relative;
+ overflow: hidden;
+ }
+ 
+.card::before {
+ content: '';
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 4px;
+ }
+
+ .card-fos60::before { background-color: #94a3b8; }
+ .card-fos70::before { background-color: #38bdf8; }
+ .card-fos80::before { background-color: #a855f7; }
+ .card-fos90::before { background-color: #10b981; } /* Color verde para FOS90 */
+ .card-fos100::before { background-color: #ef4444; } /* Color rojo para FOS100 */
+
+ .card:hover {
+ transform: translateY(-10px);
+ box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+ }
+
+ .card h2 {
+ font-size: 2rem;
+ margin-bottom: 15px;
+ }
+ 
+.card-fos70 h2 { color: #38bdf8; }
+ .card-fos80 h2 { color: #a855f7; }
+ .card-fos90 h2 { color: #10b981; } 
+ .card-fos100 h2 { color: #ef4444; } /* Título rojo para FOS100 */
+
+ .card p {
+ color: #cbd5e1;
+ margin-bottom: 30px;
+ font-size: 1rem;
+ min-height: 70px;
+ }
+
+ /* Botones */
+ .btn {
+ display: inline-block;
+ width: 100%;
+ padding: 15px;
+ border-radius: 8px;
+ text-decoration: none;
+ font-weight: bold;
+ font-size: 1.1rem;
+ transition: all 0.3s;
+ text-transform: uppercase;
+ letter-spacing: 1px;
+ border: none;
+ cursor: pointer;
+ }
+
+ .btn-primary {
+ background-color: #0ea5e9;
+ color: white;
+ box-shadow: 0 4px 14px 0 rgba(14, 165, 233, 0.39);
+ }
+ .btn-primary:hover {
+ background-color: #0284c7;
+ box-shadow: 0 6px 20px rgba(14, 165, 233, 0.23);
+ }
+
+ .btn-secondary {
+ background-color: #475569;
+ color: white;
+ }
+ .btn-secondary:hover {
+ background-color: #334155;
+ }
+ 
+.btn-tertiary {
+ background-color: #a855f7;
+ color: white;
+ box-shadow: 0 4px 14px 0 rgba(168, 85, 247, 0.39);
+ }
+ .btn-tertiary:hover {
+ background-color: #9333ea;
+ box-shadow: 0 6px 20px rgba(168, 85, 247, 0.23);
+ }
+
+ /* Botón para FOS90 */
+ .btn-quaternary {
+ background-color: #10b981;
+ color: white;
+ box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.39);
+ }
+ .btn-quaternary:hover {
+ background-color: #059669;
+ box-shadow: 0 6px 20px rgba(16, 185, 129, 0.23);
+ }
+ 
+ /* Botón nuevo para FOS100 */
+ .btn-quinary {
+ background-color: #ef4444;
+ color: white;
+ box-shadow: 0 4px 14px 0 rgba(239, 68, 68, 0.39);
+ }
+ .btn-quinary:hover {
+ background-color: #dc2626;
+ box-shadow: 0 6px 20px rgba(239, 68, 68, 0.23);
+ }
+
+ /* Etiquetas de novedades */
+ .badge {
+ position: absolute;
+ top: 20px;
+ right: 20px;
+ background-color: #ef4444;
+ color: white;
+ padding: 4px 12px;
+ border-radius: 20px;
+ font-size: 0.8rem;
+ font-weight: bold;
+ text-transform: uppercase;
+ }
+ 
+.badge-ultimate { background-color: #f59e0b; } 
+
+ /* Caja de advertencia / Requisitos */
+ .warning-box {
+ background-color: rgba(234, 179, 8, 0.1);
+ border-left: 5px solid #eab308;
+ padding: 25px;
+ margin-top: 50px;
+ border-radius: 8px;
+ text-align: left;
+ max-width: 840px;
+ margin-left: auto;
+ margin-right: auto;
+ }
+
+ .warning-box h3 {
+ color: #facc15;
+ margin-bottom: 10px;
+ font-size: 1.3rem;
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ }
+
+ .warning-box p {
+ color: #fef08a;
+ font-size: 1.1rem;
+ }
+
+ .code-highlight {
+ background-color: rgba(0,0,0,0.3);
+ padding: 4px 8px;
+ border-radius: 4px;
+ font-family: monospace;
+ color: #fff;
+ letter-spacing: 1px;
+ }
+
+ /* Pie de página */
+ footer {
+ text-align: center;
+ padding: 20px;
+ background-color: #0f172a;
+ color: #64748b;
+ font-size: 0.9rem;
+ border-top: 1px solid #1e293b;
+ }
+ </style>
+</head>
+<body>
+
+ <header>
+ <h1>Instalador <span>FOS</span></h1>
+ </header>
+
+ <div class="container">
+ <p class="description">Selecciona la versión de FOS que deseas instalar. Puedes optar por la estabilidad comprobada de FOS60 o dar el salto a las nuevas características de FOS70, FOS80, la revolucionaria versión FOS90 y el inigualable FOS100.</p>
+
+ <div class="grid-container">
+ 
+<!-- Tarjeta FOS 60 -->
+ <div class="card card-fos60">
+ <h2>FOS60</h2>
+ <p>Versión clásica y estable. Ideal para dispositivos que requieren máxima compatibilidad y rendimiento probado.</p>
+ <a href="#" class="btn btn-secondary">Instalar FOS60</a>
+ </div>
+
+ <!-- Tarjeta FOS 70 -->
+ <div class="card card-fos70">
+ <h2>FOS70</h2>
+ <p>La versión más reciente. Incluye mejoras significativas de interfaz, mayor velocidad y nuevas herramientas integradas.</p>
+ <a href="https://drive.usercontent.google.com/download?id=1yqU0RvM0YAKnhvCKIxqPc5Y2IvXfIagb&export=download&authuser=0" 
+class="btn btn-primary" 
+onclick="return confirm('¡ATENCIÓN! Tienes que instalar primero para poder abrir el FOS.\n\nPara abrir este archivo tienes que crear una carpeta en Documentos que se llame \'faustino cap cute\'.\n\n¿Ya creaste la carpeta? Presiona Aceptar para continuar con la descarga.');">
+ Instalar FOS70
+ </a>
+ </div>
+
+ <!-- Tarjeta FOS 80 -->
+ <div class="card card-fos80">
+ <h2>FOS80</h2>
+ <p>La versión definitiva. Máximo rendimiento, funciones de última generación y soporte avanzado exclusivo.</p>
+ <a href="https://drive.usercontent.google.com/download?id=1j8JWyrhmXhYpw9s7dfVxXWlv8QHmOc8x&export=download&authuser=0" 
+class="btn btn-tertiary" 
+onclick="return confirm('¡ATENCIÓN! Tienes que instalar primero para poder abrir el FOS.\n\nPara abrir este archivo tienes que crear una carpeta en Documentos que se llame \'faustino cap cute\'.\n\n¿Ya creaste la carpeta? Presiona Aceptar para continuar con la descarga.');">
+ Instalar FOS80
+ </a>
+ </div>
+
+ <!-- Tarjeta FOS 90 -->
+ <div class="card card-fos90">
+ <div class="badge badge-ultimate">Ultimate</div>
+ <h2>FOS90</h2>
+ <p>La evolución total. Interfaz de consola nativa pura, sin distracciones, historial de comandos e integración de vanguardia.</p>
+ <a href="https://drive.usercontent.google.com/download?id=11vtHgVKxpyhT4a0IIQVr_LGXf7DUO3Ge&export=download&authuser=0" 
+class="btn btn-quaternary" 
+onclick="return confirm('¡ATENCIÓN! Tienes que instalar primero para poder abrir el FOS.\n\nPara abrir este archivo tienes que crear una carpeta en Documentos que se llame \'faustino cap cute\'.\n\n¿Ya creaste la carpeta? Presiona Aceptar para continuar con la descarga.');">
+ Instalar FOS90
+ </a>
+ </div>
+ 
+ <!-- Tarjeta FOS 100 -->
+ <div class="card card-fos100">
+ <h2>FOS100</h2>
+ <p>La nueva generación. Potencia absoluta, capacidades extendidas y rendimiento optimizado para el futuro.</p>
+ <a href="#" 
+class="btn btn-quinary" 
+onclick="return confirm('¡ATENCIÓN! Tienes que instalar primero para poder abrir el FOS.\n\nPara abrir este archivo tienes que crear una carpeta en Documentos que se llame \'faustino cap cute\'.\n\n¿Ya creaste la carpeta? Presiona Aceptar para continuar con la descarga.');">
+ Instalar FOS100
+ </a>
+ </div>
+
+ </div>
+
+ <!-- Sección abajo de todo con las instrucciones obligatorias -->
+ <div class="warning-box">
+ <h3>⚠️ Requisitos Obligatorios</h3>
+ <p><strong>Tienes que instalar primero para poder abrir el FOS.</strong><br><br>
+ Para abrir este archivo tienes que crear una carpeta en tus <strong>Documentos</strong> que se llame exactamente: <span class="code-highlight">faustino cap cute</span></p>
+ </div>
+
+ </div>
+
+ <footer>
+ &copy; 2026 FOS Project. Todos los derechos reservados.
+ </footer>
+
+</body>
+</html>
